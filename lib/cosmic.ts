@@ -1,21 +1,22 @@
-import { createBucketClient } from '@cosmicjs/sdk'
+import { createBucketClient } from '@cosmicjs/sdk';
 import type { 
   Service, 
   TeamMember, 
   Testimonial, 
   CaseStudy, 
   ContactFormData,
+  ContactFormSubmission,
   CosmicResponse,
   CosmicSingleResponse,
   CosmicError
-} from '@/types'
+} from '@/types';
 
 // Create Cosmic client with environment variables
 export const cosmic = createBucketClient({
   bucketSlug: process.env.COSMIC_BUCKET_SLUG as string,
   readKey: process.env.COSMIC_READ_KEY as string,
   writeKey: process.env.COSMIC_WRITE_KEY as string,
-})
+});
 
 // Error helper for Cosmic SDK
 function isCosmicError(error: unknown): error is CosmicError {
@@ -26,11 +27,11 @@ function isCosmicError(error: unknown): error is CosmicError {
 function handleCosmicError(error: unknown, operation: string): never {
   if (isCosmicError(error)) {
     if (error.status === 404) {
-      throw new Error(`${operation}: No data found`)
+      throw new Error(`${operation}: No data found`);
     }
-    throw new Error(`${operation}: ${error.message || 'Unknown error'}`)
+    throw new Error(`${operation}: ${error.message || 'Unknown error'}`);
   }
-  throw new Error(`${operation}: Failed to complete operation`)
+  throw new Error(`${operation}: Failed to complete operation`);
 }
 
 // Fetch all services
@@ -39,14 +40,14 @@ export async function getServices(): Promise<Service[]> {
     const response = await cosmic.objects
       .find({ type: 'services' })
       .props(['id', 'title', 'slug', 'metadata', 'type', 'status'])
-      .sort('-created_at')
+      .sort('-created_at');
     
-    return response.objects as Service[]
+    return response.objects as Service[];
   } catch (error) {
     if (isCosmicError(error) && error.status === 404) {
-      return []
+      return [];
     }
-    handleCosmicError(error, 'getServices')
+    handleCosmicError(error, 'getServices');
   }
 }
 
@@ -56,14 +57,14 @@ export async function getServiceBySlug(slug: string): Promise<Service | null> {
     const response = await cosmic.objects.findOne({
       type: 'services',
       slug
-    }).props(['id', 'title', 'slug', 'metadata', 'type', 'status'])
+    }).props(['id', 'title', 'slug', 'metadata', 'type', 'status']);
     
-    return response.object as Service
+    return response.object as Service;
   } catch (error) {
     if (isCosmicError(error) && error.status === 404) {
-      return null
+      return null;
     }
-    handleCosmicError(error, `getServiceBySlug(${slug})`)
+    handleCosmicError(error, `getServiceBySlug(${slug})`);
   }
 }
 
@@ -73,14 +74,14 @@ export async function getTeamMembers(): Promise<TeamMember[]> {
     const response = await cosmic.objects
       .find({ type: 'team-members' })
       .props(['id', 'title', 'slug', 'metadata', 'type', 'status'])
-      .sort('-created_at')
+      .sort('-created_at');
     
-    return response.objects as TeamMember[]
+    return response.objects as TeamMember[];
   } catch (error) {
     if (isCosmicError(error) && error.status === 404) {
-      return []
+      return [];
     }
-    handleCosmicError(error, 'getTeamMembers')
+    handleCosmicError(error, 'getTeamMembers');
   }
 }
 
@@ -90,14 +91,14 @@ export async function getTeamMemberBySlug(slug: string): Promise<TeamMember | nu
     const response = await cosmic.objects.findOne({
       type: 'team-members',
       slug
-    }).props(['id', 'title', 'slug', 'metadata', 'type', 'status'])
+    }).props(['id', 'title', 'slug', 'metadata', 'type', 'status']);
     
-    return response.object as TeamMember
+    return response.object as TeamMember;
   } catch (error) {
     if (isCosmicError(error) && error.status === 404) {
-      return null
+      return null;
     }
-    handleCosmicError(error, `getTeamMemberBySlug(${slug})`)
+    handleCosmicError(error, `getTeamMemberBySlug(${slug})`);
   }
 }
 
@@ -107,14 +108,14 @@ export async function getTestimonials(): Promise<Testimonial[]> {
     const response = await cosmic.objects
       .find({ type: 'testimonials' })
       .props(['id', 'title', 'slug', 'metadata', 'type', 'status'])
-      .sort('-created_at')
+      .sort('-created_at');
     
-    return response.objects as Testimonial[]
+    return response.objects as Testimonial[];
   } catch (error) {
     if (isCosmicError(error) && error.status === 404) {
-      return []
+      return [];
     }
-    handleCosmicError(error, 'getTestimonials')
+    handleCosmicError(error, 'getTestimonials');
   }
 }
 
@@ -125,14 +126,14 @@ export async function getCaseStudies(): Promise<CaseStudy[]> {
       .find({ type: 'case-studies' })
       .props(['id', 'title', 'slug', 'metadata', 'type', 'status'])
       .depth(1)
-      .sort('-created_at')
+      .sort('-created_at');
     
-    return response.objects as CaseStudy[]
+    return response.objects as CaseStudy[];
   } catch (error) {
     if (isCosmicError(error) && error.status === 404) {
-      return []
+      return [];
     }
-    handleCosmicError(error, 'getCaseStudies')
+    handleCosmicError(error, 'getCaseStudies');
   }
 }
 
@@ -142,22 +143,22 @@ export async function getCaseStudyBySlug(slug: string): Promise<CaseStudy | null
     const response = await cosmic.objects.findOne({
       type: 'case-studies',
       slug
-    }).props(['id', 'title', 'slug', 'metadata', 'type', 'status']).depth(1)
+    }).props(['id', 'title', 'slug', 'metadata', 'type', 'status']).depth(1);
     
-    return response.object as CaseStudy
+    return response.object as CaseStudy;
   } catch (error) {
     if (isCosmicError(error) && error.status === 404) {
-      return null
+      return null;
     }
-    handleCosmicError(error, `getCaseStudyBySlug(${slug})`)
+    handleCosmicError(error, `getCaseStudyBySlug(${slug})`);
   }
 }
 
 // Submit contact form - SERVER-SIDE ONLY
 export async function submitContactForm(data: ContactFormData): Promise<void> {
   try {
-    const title = `${data.name} Contact Form`
-    const slug = `${data.name.toLowerCase().replace(/\s+/g, '-')}-${Date.now()}`
+    const title = `${data.name} Contact Form`;
+    const slug = `${data.name.toLowerCase().replace(/\s+/g, '-')}-${Date.now()}`;
     
     await cosmic.objects.insertOne({
       title,
@@ -169,10 +170,10 @@ export async function submitContactForm(data: ContactFormData): Promise<void> {
         email: data.email,
         message: data.message
       }
-    })
+    });
   } catch (error) {
-    console.error('Failed to submit contact form:', error)
-    handleCosmicError(error, 'submitContactForm')
+    console.error('Failed to submit contact form:', error);
+    handleCosmicError(error, 'submitContactForm');
   }
 }
 
@@ -182,24 +183,24 @@ export async function getContactSubmissions(): Promise<ContactFormSubmission[]> 
     const response = await cosmic.objects
       .find({ type: 'contact-form-submissions' })
       .props(['id', 'title', 'slug', 'metadata', 'type', 'status', 'created_at'])
-      .sort('-created_at')
+      .sort('-created_at');
     
-    return response.objects as ContactFormSubmission[]
+    return response.objects as ContactFormSubmission[];
   } catch (error) {
     if (isCosmicError(error) && error.status === 404) {
-      return []
+      return [];
     }
-    handleCosmicError(error, 'getContactSubmissions')
+    handleCosmicError(error, 'getContactSubmissions');
   }
 }
 
 // Health check function to verify Cosmic connection
 export async function checkCosmicConnection(): Promise<boolean> {
   try {
-    await cosmic.objects.find({ type: 'services' }).limit(1)
-    return true
+    await cosmic.objects.find({ type: 'services' }).limit(1);
+    return true;
   } catch (error) {
-    console.error('Cosmic connection failed:', error)
-    return false
+    console.error('Cosmic connection failed:', error);
+    return false;
   }
 }

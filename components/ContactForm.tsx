@@ -1,71 +1,71 @@
-'use client'
+'use client';
 
-import { useState } from 'react'
-import type { ContactFormData, ContactFormProps } from '@/types'
+import { useState } from 'react';
+import type { ContactFormData, ContactFormProps } from '@/types';
 
 export default function ContactForm({ onSubmit }: ContactFormProps) {
   const [formData, setFormData] = useState<ContactFormData>({
     name: '',
     email: '',
     message: ''
-  })
-  const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
-  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
-  const [errors, setErrors] = useState<Partial<ContactFormData>>({})
+  });
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [errors, setErrors] = useState<Partial<ContactFormData>>({});
 
   const validateForm = (): boolean => {
-    const newErrors: Partial<ContactFormData> = {}
+    const newErrors: Partial<ContactFormData> = {};
 
     if (!formData.name.trim()) {
-      newErrors.name = 'Name is required'
+      newErrors.name = 'Name is required';
     }
 
     if (!formData.email.trim()) {
-      newErrors.email = 'Email is required'
+      newErrors.email = 'Email is required';
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = 'Please enter a valid email address'
+      newErrors.email = 'Please enter a valid email address';
     }
 
     if (!formData.message.trim()) {
-      newErrors.message = 'Message is required'
+      newErrors.message = 'Message is required';
     }
 
-    setErrors(newErrors)
-    return Object.keys(newErrors).length === 0
-  }
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
+    e.preventDefault();
     
     if (!validateForm()) {
-      return
+      return;
     }
 
-    setIsSubmitting(true)
-    setSubmitStatus('idle')
+    setIsSubmitting(true);
+    setSubmitStatus('idle');
 
     try {
-      await onSubmit(formData)
-      setSubmitStatus('success')
-      setFormData({ name: '', email: '', message: '' })
-      setErrors({})
+      await onSubmit(formData);
+      setSubmitStatus('success');
+      setFormData({ name: '', email: '', message: '' });
+      setErrors({});
     } catch (error) {
-      setSubmitStatus('error')
-      console.error('Form submission error:', error)
+      setSubmitStatus('error');
+      console.error('Form submission error:', error);
     } finally {
-      setIsSubmitting(false)
+      setIsSubmitting(false);
     }
-  }
+  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target
-    setFormData(prev => ({ ...prev, [name]: value }))
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
     
     // Clear error when user starts typing
     if (errors[name as keyof ContactFormData]) {
-      setErrors(prev => ({ ...prev, [name]: undefined }))
+      setErrors(prev => ({ ...prev, [name]: undefined }));
     }
-  }
+  };
 
   return (
     <div className="max-w-2xl mx-auto">
@@ -168,5 +168,5 @@ export default function ContactForm({ onSubmit }: ContactFormProps) {
         )}
       </form>
     </div>
-  )
+  );
 }

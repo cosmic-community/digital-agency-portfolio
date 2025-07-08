@@ -5,7 +5,7 @@ interface CosmicObject {
   title: string;
   content?: string;
   metadata: Record<string, any>;
-  type_slug?: string;
+  type: string;
   created_at: string;
   modified_at: string;
   status: string;
@@ -189,7 +189,7 @@ export type {
   ContactFormData,
   ContactFormProps,
   PartialExcept,
-}
+};
 
 export {
   isService,
@@ -197,4 +197,4 @@ export {
   isTestimonial,
   isCaseStudy,
   isContactFormSubmission,
-}
+};

@@ -1,7 +1,7 @@
-import { Service } from '@/types'
+import { Service } from '@/types';
 
 interface ServiceCardProps {
-  service: Service
+  service: Service;
 }
 
 export default function ServiceCard({ service }: ServiceCardProps) {
@@ -57,5 +57,5 @@ export default function ServiceCard({ service }: ServiceCardProps) {
         </span>
       </div>
     </a>
-  )
+  );
 }

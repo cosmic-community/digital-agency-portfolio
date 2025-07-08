@@ -1,12 +1,12 @@
-import { Testimonial } from '@/types'
+import { Testimonial } from '@/types';
 
 interface TestimonialCardProps {
-  testimonial: Testimonial
+  testimonial: Testimonial;
 }
 
 export default function TestimonialCard({ testimonial }: TestimonialCardProps) {
   const renderStars = (rating: string) => {
-    const numStars = parseInt(rating)
+    const numStars = parseInt(rating);
     return (
       <div className="flex items-center mb-4">
         {[...Array(5)].map((_, i) => (
@@ -20,8 +20,8 @@ export default function TestimonialCard({ testimonial }: TestimonialCardProps) {
           </svg>
         ))}
       </div>
-    )
-  }
+    );
+  };
 
   return (
     <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 hover:shadow-lg transition-all border border-gray-100 dark:border-gray-700">
@@ -53,5 +53,5 @@ export default function TestimonialCard({ testimonial }: TestimonialCardProps) {
         </div>
       </div>
     </div>
-  )
+  );
 }

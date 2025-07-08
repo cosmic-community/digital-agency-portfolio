@@ -1,7 +1,7 @@
-import { CaseStudy } from '@/types'
+import { CaseStudy } from '@/types';
 
 interface CaseStudyCardProps {
-  caseStudy: CaseStudy
+  caseStudy: CaseStudy;
 }
 
 export default function CaseStudyCard({ caseStudy }: CaseStudyCardProps) {
@@ -49,5 +49,5 @@ export default function CaseStudyCard({ caseStudy }: CaseStudyCardProps) {
         </div>
       </div>
     </a>
-  )
+  );
 }
