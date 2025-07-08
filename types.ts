@@ -96,6 +96,21 @@ interface ContactFormSubmission extends CosmicObject {
   };
 }
 
+// Cart Item interface
+interface CartItem {
+  id: string;
+  service: Service;
+  quantity: number;
+  addedAt: Date;
+}
+
+// Cart state interface
+interface CartState {
+  items: CartItem[];
+  total: number;
+  itemCount: number;
+}
+
 // Type literals for ratings
 type RatingKey = '3' | '4' | '5';
 
@@ -128,6 +143,17 @@ interface CaseStudyCardProps {
   caseStudy: CaseStudy;
 }
 
+interface CartItemProps {
+  item: CartItem;
+}
+
+interface AddToCartButtonProps {
+  service: Service;
+  className?: string;
+  variant?: 'primary' | 'secondary';
+  size?: 'sm' | 'md' | 'lg';
+}
+
 // Contact form types
 interface ContactFormData {
   name: string;
@@ -137,6 +163,27 @@ interface ContactFormData {
 
 interface ContactFormProps {
   onSubmit: (data: ContactFormData) => Promise<void>;
+}
+
+// Checkout form types
+interface CheckoutFormData {
+  email: string;
+  firstName: string;
+  lastName: string;
+  company?: string;
+  address: string;
+  city: string;
+  state: string;
+  zipCode: string;
+  country: string;
+  phone: string;
+  projectDetails: string;
+  preferredStartDate: string;
+  paymentMethod: 'card' | 'invoice' | 'paypal';
+  cardNumber?: string;
+  expiryDate?: string;
+  cvv?: string;
+  nameOnCard?: string;
 }
 
 // Error types
@@ -179,6 +226,8 @@ export type {
   Testimonial,
   CaseStudy,
   ContactFormSubmission,
+  CartItem,
+  CartState,
   RatingKey,
   CosmicResponse,
   CosmicSingleResponse,
@@ -186,8 +235,11 @@ export type {
   TeamMemberCardProps,
   TestimonialCardProps,
   CaseStudyCardProps,
+  CartItemProps,
+  AddToCartButtonProps,
   ContactFormData,
   ContactFormProps,
+  CheckoutFormData,
   PartialExcept,
 };
 
