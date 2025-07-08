@@ -1,7 +1,7 @@
-import { TeamMember } from '@/types'
+import { TeamMember } from '@/types';
 
 interface TeamMemberCardProps {
-  member: TeamMember
+  member: TeamMember;
 }
 
 export default function TeamMemberCard({ member }: TeamMemberCardProps) {
@@ -59,5 +59,5 @@ export default function TeamMemberCard({ member }: TeamMemberCardProps) {
         </div>
       </div>
     </div>
-  )
+  );
 }

@@ -3,6 +3,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { Menu, X } from 'lucide-react'
 import ThemeSwitch from '@/components/ThemeSwitch'
+import SearchInput from '@/components/SearchInput'
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -37,11 +38,13 @@ export default function Header() {
 
           {/* Desktop Actions */}
           <div className="hidden md:flex items-center space-x-4">
+            <SearchInput />
             <ThemeSwitch />
           </div>
 
           {/* Mobile menu button */}
           <div className="md:hidden flex items-center space-x-2">
+            <SearchInput />
             <ThemeSwitch />
             <button
               className="p-2"
