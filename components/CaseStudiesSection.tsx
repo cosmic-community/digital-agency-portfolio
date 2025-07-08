@@ -8,13 +8,13 @@ export default async function CaseStudiesSection() {
   const featuredCaseStudies = caseStudies.slice(0, 2)
 
   return (
-    <section className="section-padding">
+    <section className="section-padding bg-white dark:bg-gray-900 transition-colors">
       <div className="container">
         <div className="text-center mb-16">
-          <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+          <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mb-4">
             Success Stories
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
             See how we've helped businesses achieve their goals with strategic design and development.
           </p>
         </div>
@@ -36,7 +36,7 @@ export default async function CaseStudiesSection() {
           </>
         ) : (
           <div className="text-center py-16">
-            <p className="text-gray-600">Case studies coming soon...</p>
+            <p className="text-gray-600 dark:text-gray-400">Case studies coming soon...</p>
           </div>
         )}
       </div>

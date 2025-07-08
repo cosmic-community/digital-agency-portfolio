@@ -6,7 +6,7 @@ interface TeamMemberCardProps {
 
 export default function TeamMemberCard({ member }: TeamMemberCardProps) {
   return (
-    <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-all border border-gray-100 dark:border-gray-700">
       {member.metadata.profile_photo && (
         <div className="aspect-square overflow-hidden">
           <img
@@ -19,14 +19,14 @@ export default function TeamMemberCard({ member }: TeamMemberCardProps) {
         </div>
       )}
       <div className="p-6">
-        <h3 className="text-xl font-bold text-gray-900 mb-1">
+        <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-1">
           {member.metadata.full_name}
         </h3>
-        <p className="text-blue-600 font-medium mb-3">
+        <p className="text-blue-600 dark:text-blue-400 font-medium mb-3">
           {member.metadata.job_title}
         </p>
         {member.metadata.bio && (
-          <p className="text-gray-600 mb-4 text-sm leading-relaxed">
+          <p className="text-gray-600 dark:text-gray-300 mb-4 text-sm leading-relaxed">
             {member.metadata.bio}
           </p>
         )}
@@ -34,7 +34,7 @@ export default function TeamMemberCard({ member }: TeamMemberCardProps) {
           {member.metadata.email && (
             <a
               href={`mailto:${member.metadata.email}`}
-              className="text-gray-400 hover:text-blue-600 transition-colors"
+              className="text-gray-400 dark:text-gray-500 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
               aria-label={`Email ${member.metadata.full_name}`}
             >
               <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
@@ -48,7 +48,7 @@ export default function TeamMemberCard({ member }: TeamMemberCardProps) {
               href={member.metadata.linkedin_url}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-400 hover:text-blue-600 transition-colors"
+              className="text-gray-400 dark:text-gray-500 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
               aria-label={`${member.metadata.full_name} LinkedIn profile`}
             >
               <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">

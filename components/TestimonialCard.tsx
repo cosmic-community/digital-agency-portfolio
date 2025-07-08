@@ -12,7 +12,7 @@ export default function TestimonialCard({ testimonial }: TestimonialCardProps) {
         {[...Array(5)].map((_, i) => (
           <svg
             key={i}
-            className={`w-5 h-5 ${i < numStars ? 'text-yellow-400' : 'text-gray-300'}`}
+            className={`w-5 h-5 ${i < numStars ? 'text-yellow-400' : 'text-gray-300 dark:text-gray-600'}`}
             fill="currentColor"
             viewBox="0 0 20 20"
           >
@@ -24,10 +24,10 @@ export default function TestimonialCard({ testimonial }: TestimonialCardProps) {
   }
 
   return (
-    <div className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
+    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 hover:shadow-lg transition-all border border-gray-100 dark:border-gray-700">
       {testimonial.metadata.rating && renderStars(testimonial.metadata.rating.key)}
       
-      <blockquote className="text-gray-700 mb-6 italic">
+      <blockquote className="text-gray-700 dark:text-gray-300 mb-6 italic">
         "{testimonial.metadata.testimonial_text}"
       </blockquote>
       
@@ -42,11 +42,11 @@ export default function TestimonialCard({ testimonial }: TestimonialCardProps) {
           />
         )}
         <div>
-          <div className="font-semibold text-gray-900">
+          <div className="font-semibold text-gray-900 dark:text-white">
             {testimonial.metadata.client_name}
           </div>
           {testimonial.metadata.position && testimonial.metadata.company && (
-            <div className="text-sm text-gray-600">
+            <div className="text-sm text-gray-600 dark:text-gray-400">
               {testimonial.metadata.position} at {testimonial.metadata.company}
             </div>
           )}

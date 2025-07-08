@@ -8,13 +8,13 @@ export default async function ServicesSection() {
   const featuredServices = services.slice(0, 3)
 
   return (
-    <section className="section-padding bg-gray-50">
+    <section className="section-padding bg-gray-50 dark:bg-gray-900 transition-colors">
       <div className="container">
         <div className="text-center mb-16">
-          <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+          <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mb-4">
             Our Services
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
             We offer comprehensive digital solutions to help your business succeed online.
           </p>
         </div>
@@ -36,7 +36,7 @@ export default async function ServicesSection() {
           </>
         ) : (
           <div className="text-center py-16">
-            <p className="text-gray-600">Services coming soon...</p>
+            <p className="text-gray-600 dark:text-gray-400">Services coming soon...</p>
           </div>
         )}
       </div>

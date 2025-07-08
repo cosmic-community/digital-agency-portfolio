@@ -6,7 +6,7 @@ interface CaseStudyCardProps {
 
 export default function CaseStudyCard({ caseStudy }: CaseStudyCardProps) {
   return (
-    <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-all border border-gray-100 dark:border-gray-700">
       {caseStudy.metadata.featured_image && (
         <div className="aspect-video overflow-hidden">
           <img
@@ -20,26 +20,26 @@ export default function CaseStudyCard({ caseStudy }: CaseStudyCardProps) {
       )}
       <div className="p-6">
         <div className="mb-2">
-          <span className="text-sm text-blue-600 font-medium">
+          <span className="text-sm text-blue-600 dark:text-blue-400 font-medium">
             {caseStudy.metadata.client_name}
           </span>
         </div>
-        <h3 className="text-xl font-bold text-gray-900 mb-3">
+        <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">
           {caseStudy.metadata.project_title}
         </h3>
         <div 
-          className="text-gray-600 mb-4 line-clamp-3"
+          className="text-gray-600 dark:text-gray-300 mb-4 line-clamp-3"
           dangerouslySetInnerHTML={{ __html: caseStudy.metadata.project_overview }}
         />
         <div className="flex items-center justify-between">
           {caseStudy.metadata.project_duration && (
-            <span className="text-sm text-gray-500">
+            <span className="text-sm text-gray-500 dark:text-gray-400">
               Duration: {caseStudy.metadata.project_duration}
             </span>
           )}
           <a
             href={`/case-studies/${caseStudy.slug}`}
-            className="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium"
+            className="inline-flex items-center text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-medium transition-colors"
           >
             Read More
             <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

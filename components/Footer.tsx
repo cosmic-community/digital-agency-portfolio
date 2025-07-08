@@ -4,14 +4,14 @@ export default function Footer() {
   const currentYear = new Date().getFullYear()
 
   return (
-    <footer className="bg-gray-900 text-white">
+    <footer className="bg-gray-900 dark:bg-gray-950 text-white">
       <div className="container section-padding">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="col-span-1 md:col-span-2">
             <Link href="/" className="text-2xl font-bold mb-4 block">
               Digital Agency
             </Link>
-            <p className="text-gray-400 mb-6 max-w-md">
+            <p className="text-gray-400 dark:text-gray-500 mb-6 max-w-md">
               We help businesses transform their digital presence with expert design, 
               development, and strategic consulting services.
             </p>
@@ -21,17 +21,17 @@ export default function Footer() {
             <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/services" className="text-gray-400 hover:text-white transition-colors">
+                <Link href="/services" className="text-gray-400 dark:text-gray-500 hover:text-white dark:hover:text-gray-300 transition-colors">
                   Services
                 </Link>
               </li>
               <li>
-                <Link href="/team" className="text-gray-400 hover:text-white transition-colors">
+                <Link href="/team" className="text-gray-400 dark:text-gray-500 hover:text-white dark:hover:text-gray-300 transition-colors">
                   Team
                 </Link>
               </li>
               <li>
-                <Link href="/case-studies" className="text-gray-400 hover:text-white transition-colors">
+                <Link href="/case-studies" className="text-gray-400 dark:text-gray-500 hover:text-white dark:hover:text-gray-300 transition-colors">
                   Case Studies
                 </Link>
               </li>
@@ -40,7 +40,7 @@ export default function Footer() {
 
           <div>
             <h3 className="text-lg font-semibold mb-4">Contact</h3>
-            <ul className="space-y-2 text-gray-400">
+            <ul className="space-y-2 text-gray-400 dark:text-gray-500">
               <li>hello@digitalagency.com</li>
               <li>+1 (555) 123-4567</li>
               <li>123 Business Ave<br />Suite 100<br />City, State 12345</li>
@@ -48,8 +48,8 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-gray-800 mt-12 pt-8 text-center">
-          <p className="text-gray-400">
+        <div className="border-t border-gray-800 dark:border-gray-700 mt-12 pt-8 text-center">
+          <p className="text-gray-400 dark:text-gray-500">
             © {currentYear} Digital Agency Portfolio. All rights reserved.
           </p>
         </div>
