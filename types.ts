@@ -83,6 +83,16 @@ interface CaseStudy extends CosmicObject {
   };
 }
 
+// Contact Form Submission object type
+interface ContactFormSubmission extends CosmicObject {
+  type_slug: 'contact-form-submissions';
+  metadata: {
+    name: string;
+    email: string;
+    message: string;
+  };
+}
+
 // Type literals for ratings
 type RatingKey = '3' | '4' | '5';
 
@@ -111,6 +121,17 @@ interface CaseStudyCardProps {
   caseStudy: CaseStudy;
 }
 
+// Contact form types
+interface ContactFormData {
+  name: string;
+  email: string;
+  message: string;
+}
+
+interface ContactFormProps {
+  onSubmit: (data: ContactFormData) => Promise<void>;
+}
+
 // Type guards
 function isService(obj: CosmicObject): obj is Service {
   return obj.type_slug === 'services';
@@ -128,18 +149,25 @@ function isCaseStudy(obj: CosmicObject): obj is CaseStudy {
   return obj.type_slug === 'case-studies';
 }
 
+function isContactFormSubmission(obj: CosmicObject): obj is ContactFormSubmission {
+  return obj.type_slug === 'contact-form-submissions';
+}
+
 export type {
   CosmicObject,
   Service,
   TeamMember,
   Testimonial,
   CaseStudy,
+  ContactFormSubmission,
   RatingKey,
   CosmicResponse,
   ServiceCardProps,
   TeamMemberCardProps,
   TestimonialCardProps,
   CaseStudyCardProps,
+  ContactFormData,
+  ContactFormProps,
 }
 
 export {
@@ -147,4 +175,5 @@ export {
   isTeamMember,
   isTestimonial,
   isCaseStudy,
+  isContactFormSubmission,
 }
