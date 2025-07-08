@@ -43,7 +43,7 @@ export function getItemTotal(item: CartItem): number {
 }
 
 export function validateCartItem(item: CartItem): boolean {
-  return (
+  return Boolean(
     item.id &&
     item.service &&
     item.service.metadata &&
