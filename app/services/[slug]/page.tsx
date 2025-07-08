@@ -57,18 +57,18 @@ export default async function ServicePage({ params }: ServicePageProps) {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div>
-            <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+            <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-6">
               {service.metadata.service_name}
             </h1>
             
             <div 
-              className="text-lg text-gray-600 mb-8 prose prose-lg"
+              className="text-lg text-gray-600 dark:text-gray-300 mb-8 prose prose-lg dark:prose-invert"
               dangerouslySetInnerHTML={{ __html: service.metadata.description }}
             />
 
             {service.metadata.starting_price && (
               <div className="mb-8">
-                <span className="text-sm text-gray-500 uppercase tracking-wide">Starting at</span>
+                <span className="text-sm text-gray-500 dark:text-gray-400 uppercase tracking-wide">Starting at</span>
                 <div className="text-3xl font-bold text-primary-600">
                   {service.metadata.starting_price}
                 </div>
@@ -77,12 +77,12 @@ export default async function ServicePage({ params }: ServicePageProps) {
 
             {features.length > 0 && (
               <div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-4">Key Features</h3>
+                <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">Key Features</h3>
                 <ul className="space-y-3">
                   {features.map((feature, index) => (
                     <li key={index} className="flex items-start">
                       <CheckCircle className="w-5 h-5 text-green-500 mt-0.5 mr-3 flex-shrink-0" />
-                      <span className="text-gray-700">{feature}</span>
+                      <span className="text-gray-700 dark:text-gray-300">{feature}</span>
                     </li>
                   ))}
                 </ul>
@@ -104,10 +104,10 @@ export default async function ServicePage({ params }: ServicePageProps) {
         </div>
 
         <div className="mt-16 text-center">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
             Ready to get started?
           </h2>
-          <p className="text-gray-600 mb-8">
+          <p className="text-gray-600 dark:text-gray-300 mb-8">
             Contact us today to discuss your project and see how we can help.
           </p>
           <Link href="/contact" className="btn-primary">

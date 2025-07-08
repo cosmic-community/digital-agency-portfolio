@@ -57,15 +57,15 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
         <div className="mb-16">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
-              <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+              <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-4">
                 {caseStudy.metadata.project_title}
               </h1>
-              <p className="text-xl text-gray-600 mb-6">
+              <p className="text-xl text-gray-600 dark:text-gray-300 mb-6">
                 Client: {caseStudy.metadata.client_name}
               </p>
               
               {caseStudy.metadata.project_duration && (
-                <div className="flex items-center text-gray-500 mb-6">
+                <div className="flex items-center text-gray-500 dark:text-gray-400 mb-6">
                   <Clock className="w-5 h-5 mr-2" />
                   <span>{caseStudy.metadata.project_duration}</span>
                 </div>
@@ -96,9 +96,9 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
 
         {/* Project Overview */}
         <div className="mb-16">
-          <h2 className="text-3xl font-bold text-gray-900 mb-6">Project Overview</h2>
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">Project Overview</h2>
           <div 
-            className="prose prose-lg max-w-none text-gray-600"
+            className="prose prose-lg max-w-none text-gray-600 dark:text-gray-300 dark:prose-invert"
             dangerouslySetInnerHTML={{ __html: caseStudy.metadata.project_overview }}
           />
         </div>
@@ -107,22 +107,22 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
           {caseStudy.metadata.challenge && (
             <div className="card">
-              <h3 className="text-xl font-semibold text-gray-900 mb-4">Challenge</h3>
-              <p className="text-gray-600">{caseStudy.metadata.challenge}</p>
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">Challenge</h3>
+              <p className="text-gray-600 dark:text-gray-300">{caseStudy.metadata.challenge}</p>
             </div>
           )}
 
           {caseStudy.metadata.solution && (
             <div className="card">
-              <h3 className="text-xl font-semibold text-gray-900 mb-4">Solution</h3>
-              <p className="text-gray-600">{caseStudy.metadata.solution}</p>
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">Solution</h3>
+              <p className="text-gray-600 dark:text-gray-300">{caseStudy.metadata.solution}</p>
             </div>
           )}
 
           {caseStudy.metadata.results && (
             <div className="card">
-              <h3 className="text-xl font-semibold text-gray-900 mb-4">Results</h3>
-              <p className="text-gray-600">{caseStudy.metadata.results}</p>
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">Results</h3>
+              <p className="text-gray-600 dark:text-gray-300">{caseStudy.metadata.results}</p>
             </div>
           )}
         </div>
@@ -130,7 +130,7 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
         {/* Project Gallery */}
         {caseStudy.metadata.project_gallery && caseStudy.metadata.project_gallery.length > 0 && (
           <div className="mb-16">
-            <h2 className="text-3xl font-bold text-gray-900 mb-8">Project Gallery</h2>
+            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-8">Project Gallery</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {caseStudy.metadata.project_gallery.map((image, index) => (
                 <img
@@ -149,10 +149,10 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
         {/* Related Service */}
         {caseStudy.metadata.related_service && (
           <div className="card text-center">
-            <h3 className="text-2xl font-bold text-gray-900 mb-4">
+            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
               Interested in {caseStudy.metadata.related_service.metadata.service_name}?
             </h3>
-            <p className="text-gray-600 mb-6">
+            <p className="text-gray-600 dark:text-gray-300 mb-6">
               Learn more about how we can help with similar projects.
             </p>
             <Link 

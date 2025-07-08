@@ -8,13 +8,13 @@ export default async function TeamSection() {
   const featuredMembers = teamMembers.slice(0, 3)
 
   return (
-    <section className="section-padding">
+    <section className="section-padding bg-white dark:bg-gray-900 transition-colors">
       <div className="container">
         <div className="text-center mb-16">
-          <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+          <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mb-4">
             Meet Our Team
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
             Our talented team of experts is dedicated to bringing your vision to life.
           </p>
         </div>
@@ -36,7 +36,7 @@ export default async function TeamSection() {
           </>
         ) : (
           <div className="text-center py-16">
-            <p className="text-gray-600">Team members coming soon...</p>
+            <p className="text-gray-600 dark:text-gray-400">Team members coming soon...</p>
           </div>
         )}
       </div>

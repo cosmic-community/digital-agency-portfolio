@@ -72,7 +72,7 @@ export default function ContactForm({ onSubmit }: ContactFormProps) {
       <form onSubmit={handleSubmit} className="space-y-6">
         {/* Name Field */}
         <div>
-          <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
+          <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
             Name *
           </label>
           <input
@@ -81,20 +81,20 @@ export default function ContactForm({ onSubmit }: ContactFormProps) {
             name="name"
             value={formData.name}
             onChange={handleChange}
-            className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors ${
-              errors.name ? 'border-red-500' : 'border-gray-300'
+            className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white dark:border-gray-600 transition-colors ${
+              errors.name ? 'border-red-500' : 'border-gray-300 dark:border-gray-600'
             }`}
             placeholder="Your full name"
             disabled={isSubmitting}
           />
           {errors.name && (
-            <p className="mt-1 text-sm text-red-600">{errors.name}</p>
+            <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.name}</p>
           )}
         </div>
 
         {/* Email Field */}
         <div>
-          <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+          <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
             Email *
           </label>
           <input
@@ -103,20 +103,20 @@ export default function ContactForm({ onSubmit }: ContactFormProps) {
             name="email"
             value={formData.email}
             onChange={handleChange}
-            className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors ${
-              errors.email ? 'border-red-500' : 'border-gray-300'
+            className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white dark:border-gray-600 transition-colors ${
+              errors.email ? 'border-red-500' : 'border-gray-300 dark:border-gray-600'
             }`}
             placeholder="your.email@example.com"
             disabled={isSubmitting}
           />
           {errors.email && (
-            <p className="mt-1 text-sm text-red-600">{errors.email}</p>
+            <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.email}</p>
           )}
         </div>
 
         {/* Message Field */}
         <div>
-          <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
+          <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
             Message *
           </label>
           <textarea
@@ -125,14 +125,14 @@ export default function ContactForm({ onSubmit }: ContactFormProps) {
             value={formData.message}
             onChange={handleChange}
             rows={6}
-            className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors resize-vertical ${
-              errors.message ? 'border-red-500' : 'border-gray-300'
+            className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white dark:border-gray-600 transition-colors resize-vertical ${
+              errors.message ? 'border-red-500' : 'border-gray-300 dark:border-gray-600'
             }`}
             placeholder="Tell us about your project or how we can help you..."
             disabled={isSubmitting}
           />
           {errors.message && (
-            <p className="mt-1 text-sm text-red-600">{errors.message}</p>
+            <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.message}</p>
           )}
         </div>
 
@@ -141,7 +141,7 @@ export default function ContactForm({ onSubmit }: ContactFormProps) {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors disabled:opacity-50 disabled:cursor-not-allowed font-medium"
+            className="w-full bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed font-medium"
           >
             {isSubmitting ? 'Sending...' : 'Send Message'}
           </button>
@@ -149,16 +149,16 @@ export default function ContactForm({ onSubmit }: ContactFormProps) {
 
         {/* Status Messages */}
         {submitStatus === 'success' && (
-          <div className="p-4 bg-green-50 border border-green-200 rounded-lg">
-            <p className="text-green-800 font-medium">
+          <div className="p-4 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg">
+            <p className="text-green-800 dark:text-green-300 font-medium">
               Thank you for your message! We'll get back to you soon.
             </p>
           </div>
         )}
 
         {submitStatus === 'error' && (
-          <div className="p-4 bg-red-50 border border-red-200 rounded-lg">
-            <p className="text-red-800 font-medium">
+          <div className="p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
+            <p className="text-red-800 dark:text-red-300 font-medium">
               There was an error sending your message. Please try again.
             </p>
           </div>

@@ -14,10 +14,10 @@ export default async function CaseStudiesPage() {
     <div className="section-padding">
       <div className="container">
         <div className="text-center mb-16">
-          <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+          <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-6">
             Case Studies
           </h1>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
             Discover how we've helped businesses transform their digital presence 
             and achieve measurable results through strategic design and development.
           </p>
@@ -31,7 +31,7 @@ export default async function CaseStudiesPage() {
           </div>
         ) : (
           <div className="text-center py-16">
-            <p className="text-gray-600">No case studies available at the moment.</p>
+            <p className="text-gray-600 dark:text-gray-400">No case studies available at the moment.</p>
           </div>
         )}
       </div>
