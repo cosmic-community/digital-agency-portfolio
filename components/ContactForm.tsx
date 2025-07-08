@@ -9,7 +9,7 @@ export default function ContactForm({ onSubmit }: ContactFormProps) {
     email: '',
     message: ''
   })
-  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
   const [errors, setErrors] = useState<Partial<ContactFormData>>({})
 
@@ -34,7 +34,7 @@ export default function ContactForm({ onSubmit }: ContactFormProps) {
     return Object.keys(newErrors).length === 0
   }
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     
     if (!validateForm()) {
@@ -86,6 +86,7 @@ export default function ContactForm({ onSubmit }: ContactFormProps) {
             }`}
             placeholder="Your full name"
             disabled={isSubmitting}
+            required
           />
           {errors.name && (
             <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.name}</p>
@@ -108,6 +109,7 @@ export default function ContactForm({ onSubmit }: ContactFormProps) {
             }`}
             placeholder="your.email@example.com"
             disabled={isSubmitting}
+            required
           />
           {errors.email && (
             <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.email}</p>
@@ -130,6 +132,7 @@ export default function ContactForm({ onSubmit }: ContactFormProps) {
             }`}
             placeholder="Tell us about your project or how we can help you..."
             disabled={isSubmitting}
+            required
           />
           {errors.message && (
             <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.message}</p>

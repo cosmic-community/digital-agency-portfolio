@@ -8,34 +8,49 @@ interface CosmicObject {
   type_slug?: string;
   created_at: string;
   modified_at: string;
+  status: string;
+  bucket: string;
+  published_at?: string;
+  modified_by?: string;
+  created_by?: string;
+  thumbnail?: string;
+}
+
+// File/Image interface for Cosmic media fields
+interface CosmicFile {
+  url: string;
+  imgix_url: string;
+  name?: string;
+  size?: number;
+  type?: string;
+}
+
+// Rating interface for select-dropdown fields
+interface CosmicRating {
+  key: string;
+  value: string;
 }
 
 // Service object type
 interface Service extends CosmicObject {
-  type_slug: 'services';
+  type: 'services';
   metadata: {
     service_name: string;
     description: string;
     key_features?: string;
     starting_price?: string;
-    service_icon?: {
-      url: string;
-      imgix_url: string;
-    };
+    service_icon?: CosmicFile;
   };
 }
 
 // Team Member object type
 interface TeamMember extends CosmicObject {
-  type_slug: 'team-members';
+  type: 'team-members';
   metadata: {
     full_name: string;
     job_title: string;
     bio?: string;
-    profile_photo?: {
-      url: string;
-      imgix_url: string;
-    };
+    profile_photo?: CosmicFile;
     email?: string;
     linkedin_url?: string;
   };
@@ -43,26 +58,20 @@ interface TeamMember extends CosmicObject {
 
 // Testimonial object type
 interface Testimonial extends CosmicObject {
-  type_slug: 'testimonials';
+  type: 'testimonials';
   metadata: {
     client_name: string;
     company?: string;
     position?: string;
     testimonial_text: string;
-    rating?: {
-      key: string;
-      value: string;
-    };
-    client_photo?: {
-      url: string;
-      imgix_url: string;
-    };
+    rating?: CosmicRating;
+    client_photo?: CosmicFile;
   };
 }
 
 // Case Study object type
 interface CaseStudy extends CosmicObject {
-  type_slug: 'case-studies';
+  type: 'case-studies';
   metadata: {
     project_title: string;
     client_name: string;
@@ -71,21 +80,15 @@ interface CaseStudy extends CosmicObject {
     solution?: string;
     results?: string;
     project_duration?: string;
-    featured_image?: {
-      url: string;
-      imgix_url: string;
-    };
-    project_gallery?: Array<{
-      url: string;
-      imgix_url: string;
-    }>;
+    featured_image?: CosmicFile;
+    project_gallery?: CosmicFile[];
     related_service?: Service;
   };
 }
 
 // Contact Form Submission object type
 interface ContactFormSubmission extends CosmicObject {
-  type_slug: 'contact-form-submissions';
+  type: 'contact-form-submissions';
   metadata: {
     name: string;
     email: string;
@@ -102,6 +105,10 @@ interface CosmicResponse<T> {
   total: number;
   limit?: number;
   skip?: number;
+}
+
+interface CosmicSingleResponse<T> {
+  object: T;
 }
 
 // Component prop interfaces
@@ -132,29 +139,41 @@ interface ContactFormProps {
   onSubmit: (data: ContactFormData) => Promise<void>;
 }
 
+// Error types
+interface CosmicError {
+  status: number;
+  message: string;
+}
+
 // Type guards
 function isService(obj: CosmicObject): obj is Service {
-  return obj.type_slug === 'services';
+  return obj.type === 'services';
 }
 
 function isTeamMember(obj: CosmicObject): obj is TeamMember {
-  return obj.type_slug === 'team-members';
+  return obj.type === 'team-members';
 }
 
 function isTestimonial(obj: CosmicObject): obj is Testimonial {
-  return obj.type_slug === 'testimonials';
+  return obj.type === 'testimonials';
 }
 
 function isCaseStudy(obj: CosmicObject): obj is CaseStudy {
-  return obj.type_slug === 'case-studies';
+  return obj.type === 'case-studies';
 }
 
 function isContactFormSubmission(obj: CosmicObject): obj is ContactFormSubmission {
-  return obj.type_slug === 'contact-form-submissions';
+  return obj.type === 'contact-form-submissions';
 }
+
+// Utility type for making all properties optional except specified ones
+type PartialExcept<T, K extends keyof T> = Partial<T> & Pick<T, K>;
 
 export type {
   CosmicObject,
+  CosmicFile,
+  CosmicRating,
+  CosmicError,
   Service,
   TeamMember,
   Testimonial,
@@ -162,12 +181,14 @@ export type {
   ContactFormSubmission,
   RatingKey,
   CosmicResponse,
+  CosmicSingleResponse,
   ServiceCardProps,
   TeamMemberCardProps,
   TestimonialCardProps,
   CaseStudyCardProps,
   ContactFormData,
   ContactFormProps,
+  PartialExcept,
 }
 
 export {
