@@ -4,6 +4,18 @@ interface CartItem {
   price: number;
   quantity: number;
   image?: string;
+  service: {
+    id: string;
+    slug: string;
+    metadata: {
+      service_name: string;
+      description: string;
+      starting_price: string;
+      service_icon?: {
+        imgix_url: string;
+      };
+    };
+  };
 }
 
 interface CartState {
@@ -94,6 +106,41 @@ class CartManager {
     return { ...this.state };
   }
 }
+
+// Utility functions for cart calculations and formatting
+export const formatPrice = (price: number): string => {
+  return new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+  }).format(price);
+};
+
+export const getItemPrice = (item: CartItem): number => {
+  if (item.price) {
+    return item.price;
+  }
+  // Fallback to parsing from service metadata
+  const priceString = item.service?.metadata?.starting_price || '0';
+  return parseFloat(priceString.replace(/[^\d.]/g, '')) || 0;
+};
+
+export const getItemTotal = (item: CartItem): number => {
+  return getItemPrice(item) * item.quantity;
+};
+
+export const calculateCartSubtotal = (items: CartItem[]): number => {
+  return items.reduce((sum, item) => sum + getItemTotal(item), 0);
+};
+
+export const calculateTax = (subtotal: number, taxRate: number = 0.08): number => {
+  return subtotal * taxRate;
+};
+
+export const calculateCartTotalWithTax = (items: CartItem[], taxRate: number = 0.08): number => {
+  const subtotal = calculateCartSubtotal(items);
+  const tax = calculateTax(subtotal, taxRate);
+  return subtotal + tax;
+};
 
 export const cartManager = new CartManager();
 export type { CartItem, CartState };
