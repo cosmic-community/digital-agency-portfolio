@@ -1,6 +1,5 @@
 'use client'
 import { useState, useCallback } from 'react'
-import { searchContent } from '@/lib/search'
 
 export interface SearchResult {
   id: string
@@ -26,8 +25,13 @@ export function useSearch() {
     setError(null)
 
     try {
-      const searchResults = await searchContent(query)
-      setResults(searchResults)
+      const response = await fetch(`/api/search?q=${encodeURIComponent(query)}`)
+      if (!response.ok) {
+        throw new Error('Search failed')
+      }
+      
+      const data = await response.json()
+      setResults(data.results || [])
     } catch (err) {
       setError('Search failed. Please try again.')
       console.error('Search error:', err)
