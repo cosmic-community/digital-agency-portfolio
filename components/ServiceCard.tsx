@@ -6,7 +6,10 @@ interface ServiceCardProps {
 
 export default function ServiceCard({ service }: ServiceCardProps) {
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 hover:shadow-lg transition-all border border-gray-100 dark:border-gray-700">
+    <a 
+      href={`/services/${service.slug}`}
+      className="block bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 hover:shadow-lg transition-all border border-gray-100 dark:border-gray-700 group"
+    >
       {service.metadata.service_icon && (
         <div className="w-16 h-16 mb-4 overflow-hidden rounded-lg">
           <img
@@ -18,7 +21,7 @@ export default function ServiceCard({ service }: ServiceCardProps) {
           />
         </div>
       )}
-      <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">
+      <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
         {service.metadata.service_name}
       </h3>
       <div 
@@ -46,16 +49,13 @@ export default function ServiceCard({ service }: ServiceCardProps) {
             Starting at {service.metadata.starting_price}
           </span>
         )}
-        <a
-          href={`/services/${service.slug}`}
-          className="inline-flex items-center text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-medium transition-colors"
-        >
+        <span className="inline-flex items-center text-blue-600 dark:text-blue-400 group-hover:text-blue-700 dark:group-hover:text-blue-300 font-medium transition-colors">
           Learn More
           <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
           </svg>
-        </a>
+        </span>
       </div>
-    </div>
+    </a>
   )
 }
