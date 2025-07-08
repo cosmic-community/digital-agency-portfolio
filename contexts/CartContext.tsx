@@ -2,13 +2,10 @@
 
 import React, { createContext, useContext, useReducer, useEffect, ReactNode } from 'react';
 import { Service } from '@/types';
+import { CartItem as LibCartItem } from '@/lib/cart';
 
-export interface CartItem {
-  id: string;
-  service: Service;
-  quantity: number;
-  addedAt: Date;
-}
+// Use the CartItem interface from lib/cart to ensure compatibility
+export interface CartItem extends LibCartItem {}
 
 interface CartState {
   items: CartItem[];
@@ -44,9 +41,27 @@ function parsePrice(priceString: string): number {
 
 function calculateTotal(items: CartItem[]): number {
   return items.reduce((total, item) => {
-    const price = parsePrice(item.service.metadata.starting_price || '0');
-    return total + (price * item.quantity);
+    return total + (item.price * item.quantity);
   }, 0);
+}
+
+function serviceToCartItem(service: Service): Omit<CartItem, 'quantity'> {
+  return {
+    id: service.id,
+    name: service.metadata.service_name,
+    price: parsePrice(service.metadata.starting_price || '0'),
+    image: service.metadata.service_icon?.imgix_url,
+    service: {
+      id: service.id,
+      slug: service.slug,
+      metadata: {
+        service_name: service.metadata.service_name,
+        description: service.metadata.description,
+        starting_price: service.metadata.starting_price || '0',
+        service_icon: service.metadata.service_icon
+      }
+    }
+  };
 }
 
 function cartReducer(state: CartState, action: CartAction): CartState {
@@ -68,10 +83,8 @@ function cartReducer(state: CartState, action: CartAction): CartState {
       }
       
       const newItem: CartItem = {
-        id: action.payload.id,
-        service: action.payload,
-        quantity: 1,
-        addedAt: new Date()
+        ...serviceToCartItem(action.payload),
+        quantity: 1
       };
       
       const newItems = [...state.items, newItem];
@@ -148,11 +161,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
     if (savedCart) {
       try {
         const parsedCart = JSON.parse(savedCart);
-        const cartItems = parsedCart.map((item: any) => ({
-          ...item,
-          addedAt: new Date(item.addedAt)
-        }));
-        dispatch({ type: 'LOAD_CART', payload: cartItems });
+        dispatch({ type: 'LOAD_CART', payload: parsedCart });
       } catch (error) {
         console.error('Error loading cart from localStorage:', error);
       }
