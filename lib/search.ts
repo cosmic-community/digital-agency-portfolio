@@ -29,28 +29,30 @@ export async function searchContent(query: string): Promise<SearchResult[]> {
 
   try {
     // Search services
-    const services = await cosmic.objects
+    const servicesResponse = await cosmic.objects
       .find({ type: 'services' })
       .props(['id', 'title', 'slug', 'metadata'])
 
-    for (const service of services.objects as Service[]) {
-      const searchableText = [
-        service.title,
-        service.metadata.service_name,
-        stripHtml(service.metadata.description || ''),
-        service.metadata.key_features || '',
-        service.metadata.starting_price || ''
-      ].join(' ')
+    if (servicesResponse.objects) {
+      for (const service of servicesResponse.objects as Service[]) {
+        const searchableText = [
+          service.title,
+          service.metadata.service_name || '',
+          stripHtml(service.metadata.description || ''),
+          service.metadata.key_features || '',
+          service.metadata.starting_price || ''
+        ].join(' ')
 
-      if (matchesQuery(searchableText, query)) {
-        results.push({
-          id: service.id,
-          type: 'services',
-          title: service.metadata.service_name || service.title,
-          slug: service.slug,
-          description: stripHtml(service.metadata.description || '').substring(0, 150),
-          metadata: service.metadata
-        })
+        if (matchesQuery(searchableText, query)) {
+          results.push({
+            id: service.id,
+            type: 'services',
+            title: service.metadata.service_name || service.title,
+            slug: service.slug,
+            description: stripHtml(service.metadata.description || '').substring(0, 150),
+            metadata: service.metadata
+          })
+        }
       }
     }
   } catch (error) {
@@ -61,28 +63,30 @@ export async function searchContent(query: string): Promise<SearchResult[]> {
 
   try {
     // Search team members
-    const teamMembers = await cosmic.objects
+    const teamResponse = await cosmic.objects
       .find({ type: 'team-members' })
       .props(['id', 'title', 'slug', 'metadata'])
 
-    for (const member of teamMembers.objects as TeamMember[]) {
-      const searchableText = [
-        member.title,
-        member.metadata.full_name,
-        member.metadata.job_title,
-        member.metadata.bio || '',
-        member.metadata.email || ''
-      ].join(' ')
+    if (teamResponse.objects) {
+      for (const member of teamResponse.objects as TeamMember[]) {
+        const searchableText = [
+          member.title,
+          member.metadata.full_name || '',
+          member.metadata.job_title || '',
+          member.metadata.bio || '',
+          member.metadata.email || ''
+        ].join(' ')
 
-      if (matchesQuery(searchableText, query)) {
-        results.push({
-          id: member.id,
-          type: 'team-members',
-          title: member.metadata.full_name || member.title,
-          slug: member.slug,
-          description: member.metadata.job_title + (member.metadata.bio ? ` - ${member.metadata.bio.substring(0, 100)}` : ''),
-          metadata: member.metadata
-        })
+        if (matchesQuery(searchableText, query)) {
+          results.push({
+            id: member.id,
+            type: 'team-members',
+            title: member.metadata.full_name || member.title,
+            slug: member.slug,
+            description: member.metadata.job_title + (member.metadata.bio ? ` - ${member.metadata.bio.substring(0, 100)}` : ''),
+            metadata: member.metadata
+          })
+        }
       }
     }
   } catch (error) {
@@ -93,31 +97,33 @@ export async function searchContent(query: string): Promise<SearchResult[]> {
 
   try {
     // Search case studies
-    const caseStudies = await cosmic.objects
+    const caseStudiesResponse = await cosmic.objects
       .find({ type: 'case-studies' })
       .props(['id', 'title', 'slug', 'metadata'])
       .depth(1)
 
-    for (const caseStudy of caseStudies.objects as CaseStudy[]) {
-      const searchableText = [
-        caseStudy.title,
-        caseStudy.metadata.project_title,
-        caseStudy.metadata.client_name,
-        stripHtml(caseStudy.metadata.project_overview || ''),
-        caseStudy.metadata.challenge || '',
-        caseStudy.metadata.solution || '',
-        caseStudy.metadata.results || ''
-      ].join(' ')
+    if (caseStudiesResponse.objects) {
+      for (const caseStudy of caseStudiesResponse.objects as CaseStudy[]) {
+        const searchableText = [
+          caseStudy.title,
+          caseStudy.metadata.project_title || '',
+          caseStudy.metadata.client_name || '',
+          stripHtml(caseStudy.metadata.project_overview || ''),
+          caseStudy.metadata.challenge || '',
+          caseStudy.metadata.solution || '',
+          caseStudy.metadata.results || ''
+        ].join(' ')
 
-      if (matchesQuery(searchableText, query)) {
-        results.push({
-          id: caseStudy.id,
-          type: 'case-studies',
-          title: caseStudy.metadata.project_title || caseStudy.title,
-          slug: caseStudy.slug,
-          description: `${caseStudy.metadata.client_name} - ${stripHtml(caseStudy.metadata.project_overview || '').substring(0, 100)}`,
-          metadata: caseStudy.metadata
-        })
+        if (matchesQuery(searchableText, query)) {
+          results.push({
+            id: caseStudy.id,
+            type: 'case-studies',
+            title: caseStudy.metadata.project_title || caseStudy.title,
+            slug: caseStudy.slug,
+            description: `${caseStudy.metadata.client_name || ''} - ${stripHtml(caseStudy.metadata.project_overview || '').substring(0, 100)}`,
+            metadata: caseStudy.metadata
+          })
+        }
       }
     }
   } catch (error) {
@@ -128,28 +134,30 @@ export async function searchContent(query: string): Promise<SearchResult[]> {
 
   try {
     // Search testimonials
-    const testimonials = await cosmic.objects
+    const testimonialsResponse = await cosmic.objects
       .find({ type: 'testimonials' })
       .props(['id', 'title', 'slug', 'metadata'])
 
-    for (const testimonial of testimonials.objects as Testimonial[]) {
-      const searchableText = [
-        testimonial.title,
-        testimonial.metadata.client_name,
-        testimonial.metadata.company || '',
-        testimonial.metadata.position || '',
-        testimonial.metadata.testimonial_text
-      ].join(' ')
+    if (testimonialsResponse.objects) {
+      for (const testimonial of testimonialsResponse.objects as Testimonial[]) {
+        const searchableText = [
+          testimonial.title,
+          testimonial.metadata.client_name || '',
+          testimonial.metadata.company || '',
+          testimonial.metadata.position || '',
+          testimonial.metadata.testimonial_text || ''
+        ].join(' ')
 
-      if (matchesQuery(searchableText, query)) {
-        results.push({
-          id: testimonial.id,
-          type: 'testimonials',
-          title: testimonial.metadata.client_name || testimonial.title,
-          slug: testimonial.slug,
-          description: `${testimonial.metadata.company || ''} ${testimonial.metadata.position || ''} - ${testimonial.metadata.testimonial_text.substring(0, 100)}`.trim(),
-          metadata: testimonial.metadata
-        })
+        if (matchesQuery(searchableText, query)) {
+          results.push({
+            id: testimonial.id,
+            type: 'testimonials',
+            title: testimonial.metadata.client_name || testimonial.title,
+            slug: testimonial.slug,
+            description: `${testimonial.metadata.company || ''} ${testimonial.metadata.position || ''} - ${testimonial.metadata.testimonial_text?.substring(0, 100) || ''}`.trim(),
+            metadata: testimonial.metadata
+          })
+        }
       }
     }
   } catch (error) {
