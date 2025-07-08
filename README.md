@@ -1,7 +1,5 @@
 # Digital Agency Portfolio
 
-THEME BRANCH
-
 A modern, responsive portfolio website built with Next.js 15 and Cosmic CMS. This application showcases services, team members, testimonials, and case studies for a digital agency, featuring beautiful UI components and optimized performance.
 
 ![Digital Agency Portfolio](https://imgix.cosmicjs.com/55d5e6b0-5bc2-11f0-a051-23c10f41277a-photo-1556742049-0cfed4f6a45d-1751955065980.jpg?w=1200&h=600&fit=crop&auto=format,compress)
