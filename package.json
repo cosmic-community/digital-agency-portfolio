@@ -8,19 +8,19 @@
     "start": "next start",
     "lint": "next lint",
     "type-check": "tsc --noEmit",
-    "prebuild": "bun run type-check"
+    "prebuild": "npm run type-check"
   },
   "dependencies": {
     "@cosmicjs/sdk": "^1.5.5",
-    "lucide-react": "^0.263.1",
+    "lucide-react": "^0.460.0",
     "next": "^15.0.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
   },
   "devDependencies": {
     "@types/node": "^20.0.0",
-    "@types/react": "^18.2.0",
-    "@types/react-dom": "^18.2.0",
+    "@types/react": "^18.3.0",
+    "@types/react-dom": "^18.3.0",
     "autoprefixer": "^10.4.14",
     "eslint": "^8.42.0",
     "eslint-config-next": "^15.0.0",
