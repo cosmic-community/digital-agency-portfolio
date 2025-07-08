@@ -15,7 +15,7 @@ export default async function TeamPage() {
       <div className="container">
         <div className="text-center mb-16">
           <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
-            Meet Our Team
+            Meet Our Team of Badasses
           </h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             Our diverse team of experts brings together years of experience in design, 
